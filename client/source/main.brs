@@ -12,7 +12,7 @@ function init() as Void
 
     '' creating global variable ''
     m.global = screen.getGlobalNode()  
-    m.global.addFields({
+    m.global.addFields({ target: "", filtered: "",
         auth: "", ip:"http://192.168.101.8:3000",
         type: "peliculas", filter: "", offset:0
     }) : print m.global

@@ -2,10 +2,13 @@
 function initState() as Void
     if m.global.type = "" or m.global.type = invalid then m.global.type = "peliculas" 
     m.top.findNode("category_list_container").visible = false
+    m.top.findNode("search_layout").removeChildIndex(0)
     m.top.findNode("movie_layout").removeChildIndex(0)
     m.top.findNode("movie_container").setFocus(true)
     m.index = 1 : loadNewElement()
 end function
+
+'-------------------------------------------------------------------------------------------------------------'
 
 function loadNewElement() as Void
 
@@ -31,6 +34,8 @@ function loadNewElement() as Void
 
 end function
 
+'-------------------------------------------------------------------------------------------------------------'
+
 function showCategorySelector() as Void
     m.currentID = "category_list_container"
     m.catlist = m.top.findNode(m.currentID) 
@@ -43,4 +48,11 @@ end function
 function hideCategorySelector() as Void
     m.currentID = "btn_menu" : m.catlist.visible = false
     m.top.findNode(m.currentID).setFocus(true)
+end function
+
+function showMovieContent() as Void
+    el = m.top.findNode("movie_layout") : initState()
+    m.layout = createObject("roSGNode","movieScene")
+    m.layout.observeField("visible","eventMain")
+    el.appendChild(m.layout)
 end function

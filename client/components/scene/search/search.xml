@@ -5,13 +5,13 @@
         <field id="hash" type="string" />
     </interface>
     
-    <children>
-        <Rectangle width="1820" height="720" color="0x020202"/>
+    <children> <Rectangle width="1820" height="720" color="0x020202"/>
         <MiniKeyboard translation="[110,130]" id="search_keyboard"/>
         <LabelList id="search_list"
-            translation="[320,130]"
-            itemSize = "[300,50]"
+            translation="[580,130]"
+            itemSize = "[600,50]"
         />
+        <OverHang title="ArepaTV" color="0x000000"/>
     </children>
 
     <script type="text/brightscript" uri="event.brs" />  

@@ -12,6 +12,9 @@
     <script type = "text/brightscript" > <![CDATA[
         function main() as Void
 
+            regex = createObject("roRegex","\s+| +","gi")
+            m.top.uri = regex.replaceAll(m.top.uri,"")
+
             request = createObject("roUrlTransfer")
             request.setUrl( m.top.uri )
 

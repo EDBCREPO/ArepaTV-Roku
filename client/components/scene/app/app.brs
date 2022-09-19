@@ -3,13 +3,14 @@ sub init() : eventMain() : main() : end sub
 function main() as Void
 
     m.loading = false : loadMovies()
-    m.global.observeField("type","loadMovies")
-    m.global.observeField("filter","loadMovies")
     m.global.observeField("offset","movieRequest")
+    m.global.observeField("target","showMovieContent")
 
     catList = m.top.findNode("category_list_container")
     catlist.getChild(1).observeField("itemSelected","typeLoader")
     catlist.getChild(2).observeField("itemSelected","categoryLoader")
+
+    m.top.findNode("movie_container").observeField("itemSelected","contentLoader")
 
 end function 
 
@@ -18,37 +19,33 @@ end function
 function typeLoader() as Void
     catList = m.top.findNode("category_list_container")
     el = catlist.getChild(1) : index = el.itemSelected
-    m.global.setFields({ filter: "",
+    m.global.setFields({ filter: "", 
         type: el.content.getChild(index).title, 
-    })
+    }) : loadMovies()
 end function
 
 function categoryLoader() as Void
     catList = m.top.findNode("category_list_container")
     el = catlist.getChild(2) : index = el.itemSelected
-    m.global.setFields({
+    m.global.setFields({ 
         filter: el.content.getChild(index).title, 
-    })
+    }) : loadMovies()
+end function
+
+function contentLoader() as Void
+    el = m.top.findNode("movie_container") : index = el.itemSelected
+    m.global.setFields({ target: el.content.getChild(index).target })
 end function
 
 '-------------------------------------------------------------------------------------------------------------'
 
-function loadMovies() as Void
-    m.movies = createObject("roAssociativeArray")
-    m.movies.list = m.top.findNode("movie_container")
-    m.movies.content = createObject("roSGNode","ContentNode")
-    m.movies.list.removeChildIndex(0) : m.movies.list.content = m.movies.content
-    initState() : categoryRequest() : movieRequest()
-end function
-
 function movieRequest() as Void
     if m.loading = false : m.loading = true
 
-    offset = mid(strI( m.movies.content.getChildCount() ),2)
+    offset = strI( m.movies.content.getChildCount() )
 
-    uri = m.global.ip+"/movies?" :  uri+= "offset="+offset 
-    uri+= "&filter="+m.global.filter : uri+= "&type="+m.global.type
-    print uri
+    uri = m.global.ip+"/movies?" :  uri+= "type="+m.global.type
+    uri+= "&offset="+offset : uri+= "&filter="+m.global.filter
 
     m.fetch = createObject("roSGNode","fetchApi")
     m.fetch.observeField("response","showMovies")
@@ -68,6 +65,8 @@ function categoryRequest() as Void
     m.catfetch.functionName = "main"
     m.catfetch.control = "RUN"
 end function
+
+'-------------------------------------------------------------------------------------------------------------'
 
 function showCategories() as Void
     categories = ParseJson( m.catfetch.response )
@@ -94,8 +93,18 @@ function showMovies() as Void
         for each item in movies
             node = createObject("roSGNode","ContentNode")
             node.SDGRIDPOSTERURL = item.imagen : node.HDGRIDPOSTERURL = item.imagen
-            node.addFields({ hash: item.hash }) : node.title = item.nombre
+            node.addFields({ target: item.target }) : node.title = item.nombre
             m.movies.content.appendChild( node )
         end for : m.loading = false
     end if 
 end function 
+
+'-------------------------------------------------------------------------------------------------------------'
+
+function loadMovies() as Void
+    m.movies = createObject("roAssociativeArray")
+    m.movies.list = m.top.findNode("movie_container")
+    m.movies.content = createObject("roSGNode","ContentNode")
+    m.movies.list.removeChildIndex(0) : m.movies.list.content = m.movies.content
+    initState() : categoryRequest() : movieRequest()
+end function

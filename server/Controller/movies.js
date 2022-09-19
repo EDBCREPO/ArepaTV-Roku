@@ -4,24 +4,28 @@ const url = require("url")
 module.exports = (req,res)=>{
 
     const type = req.query.filter == '' ? 'list' : 'match';
+    const table = req.query.type || 'peliculas';
     const search = url.format({
         host: `http://localhost:27017/${type}`,
         query:{
-            db: "arepatv",
+            table: table, db: "arepatv", 
             target: req.query.filter || '',
-            table: req.query.type || 'peliculas',
             length: 30, offset: req.query.offset || 0
         }
     })
 
     console.log( search )
 
-    fetch(search,{responseType:'stream'}).then((response)=>{
-        res.writeHead(200,{'content-type':'text/plain'})
-        response.pipe(res)
+    fetch(search).then((response)=>{
+        res.json(200,response.data.map(x=>{
+            return {
+                nombre: x.nombre,
+                imagen: x.imagen,
+                target: `${table}|${x.hash}`,
+            }
+        }))
     }).catch((reject)=>{
-        res.writeHead(404,{'content-type':'text/plain'})
-        try{ reject.pipe(res) } catch(e) { res.end(e?.message) }
+        res.send(404,e?.message)
     })
 
 }

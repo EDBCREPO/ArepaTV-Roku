@@ -21,7 +21,8 @@ module.exports = (req,res)=>{
         
                 const {data} = await fetch(search)
                 data.map(y=>{ suggestion.push({
-                    nombre: `${x} - ${y.nombre}` ,tipo: x
+                    nombre: `${x} - ${y.nombre}`, 
+                    target: `${x}|${y.hash}`,
                 })})
     
             } catch(e) { console.log(e) }

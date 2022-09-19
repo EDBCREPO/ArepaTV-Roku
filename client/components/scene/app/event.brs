@@ -13,13 +13,14 @@ function eventMain() as Void
 end function
 
 function keyEvent( event as Object )
-    el = m.top.findNode("movie_layout")
-    if m.top.visible = true and el.getChild(0) = invalid
-        if m.currentID <> "category_list_container"
+    if m.top.visible = true
+        el1 = m.top.findNode("search_layout").getChild(0)
+        el2 = m.top.findNode("movie_layout").getChild(0)
+        if el1 <> invalid or el2 <> invalid
+            m.layout.callFunc("keyEvent",{ key: event.key, pressed: event.pressed })
+        else if m.currentID <> "category_list_container"
             mainScreenEvent(event)
         else : categoryListEvent(event) : end if
-    else
-        m.layout.callFunc("keyEvent",{ key: event.key, pressed: event.pressed })
     end if
 end function 
 
@@ -72,13 +73,12 @@ function selectedElement() as Void
     else if m.currentID = "btn_home"
         reloadPage()
     else if m.currentID = "btn_search"
-        el = m.top.findNode("movie_layout")
+        el = m.top.findNode("search_layout")
         m.layout = createObject("roSGNode","searchScene") 
         el.appendChild(m.layout) : m.layout.observeField("visible","eventMain")
     end if
 end function
 
 function reloadPage() as Void
-    m.global.filter = ""
-    loadMovies()
+    m.global.filter = "" : loadMovies()
 end function

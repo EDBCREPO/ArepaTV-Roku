@@ -45,7 +45,8 @@ function logoutLayout() as Void
         auth = createObject("roSGNode","registrationApi")
         auth.observeField("status","loginLayout")
         auth.functionName = "removeAuthData"
-        auth.control = "RUN" : main()
+        auth.control = "RUN" : sleep(1000)
+        main()
     end if
 end function
 
