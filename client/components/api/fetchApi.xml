@@ -1,0 +1,48 @@
+<component name="fetchApi" extends="Task">
+    <interface>
+        <field id="uri" type="string" />
+        <field id="body" type="string" />
+        <field id="user" type="string" />
+        <field id="pass" type="string" />
+        <field id="method" type="string" />
+        <field id="response" type="string" />
+        <field id="headers" type="assocarray" />
+    </interface>
+
+    <script type = "text/brightscript" > <![CDATA[
+        function main() as Void
+
+            request = createObject("roUrlTransfer")
+            request.setUrl( m.top.uri )
+
+            if left( m.top.uri,5 ) = "https"
+                request.SetCertificatesFile("common:/certs/ca-bundle.crt")
+                request.AddHeader("X-Roku-Reserved-Dev-Id", "")
+                request.InitClientCertificates()
+            End if : request.SetUrl( m.top.uri )
+
+            if m.top.method <> ""
+                request.SetRequest(m.top.method) 
+            else 
+                request.SetRequest("GET")
+            end if 
+
+            if m.top.user <> "" and m.top.pass <> ""
+                request.SetUserAndPassword( m.top.user,m.top.pass )
+            end if
+
+            if m.top.headers <> invalid
+                for each item in m.top.headers
+                    request.AddHeader(item,m.top.headers[item])
+                end for
+            end if
+
+            if m.top.body <> ""
+                m.top.response = request.PostFromString(m.top.body)
+            else
+                m.top.response = request.GetToString()
+            end if
+
+        end function
+    ]]> </script>
+</component>

@@ -1,0 +1,53 @@
+<component name="loginScene" extends="Group">
+
+    <interface>
+        <field id="hash" type="string" />
+        <function name="keyEvent" />
+    </interface>
+
+    <children>
+
+        <Group>
+            <Poster width="1280" height="720" uri="https://arepatv.ml/img/index/banner.webp" />
+            <Rectangle width="1280" height="720" color="0x000000E0" />
+        </Group>
+
+        <Group>
+            <Group>
+
+                <Group translation="[450,220]">
+                    <Rectangle width="384" height="45" color="0xE91E63" 
+                               visible="false" id="login_error_border"/>
+                    <Label text="ArepaTV | " width="384"
+                           translation="[25,10]" id="login_error_text" />
+                </Group>
+
+                <Group id="login_user" translation="[450,280]">
+                    <TextEditBox hintText="Correo" width="384" id="login_user_text" />
+                </Group>
+
+                <Group id="login_pass" translation="[450,340]">
+                    <TextEditBox hintText="Contraseña" secureMode="true" width="384" id="login_pass_text" />
+                </Group>
+
+                <Group id="login_sign" translation="[450,405]">
+                    <Rectangle color="0x536DFEA0" 
+                        width="384" height="45"/>
+                    <Label text="iniciar Sesion" 
+                        translation="[25,10]"
+                        id="login_sign_text"
+                        color="0xFFFFFF"/>
+                </Group>
+            </Group>
+
+            <Group visible="false" id="keyboard_container">
+                <Rectangle color="0x020202" width="1280" height="720"/>
+                <Keyboard id="login_key" translation="[160,200]"/>
+            </Group>
+
+        </Group> <OverHang title="ArepaTV"/>
+    </children>
+    
+    <script type="text/brightscript" uri="event.brs" />
+    <script type="text/brightscript" uri="login.brs" />
+</component>

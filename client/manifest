@@ -1,0 +1,17 @@
+subtitle=Disfruta contenido ilimitado de tus plataformas favoritas en un solo lugar
+
+title=ArepaTV
+rsg_version=1.1
+major_version=1
+minor_version=1
+ui_resolutions=hd
+build_version=00001
+
+splash_screen_hd=pkg:/images/logo/splash_hd.jpg
+splash_screen_sd=pkg:/images/logo/splash_sd.jpg
+splash_screen_fhd=pkg:/images/logo/splash_fhd.jpg
+mm_icon_side_hd=pkg:/images/logo/icon_side_hd.png
+mm_icon_side_sd=pkg:/images/logo/icon_focus_sd.png
+mm_icon_focus_hd=pkg:/images/logo/icon_focus_hd.png
+mm_icon_focus_sd=pkg:/images/logo/icon_focus_sd.png
+

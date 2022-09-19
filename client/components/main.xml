@@ -1,0 +1,7 @@
+<component name="main" extends="Scene">
+    <children>
+        <Group id="app_layout"/>
+        <Group id="login_layout"/>
+    </children>
+    <script type="text/brightscript" uri="main.brs" />
+</component>

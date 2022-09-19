@@ -1,0 +1,19 @@
+<component name="searchScene" extends="Group">
+    
+    <interface>
+        <function name="keyEvent" />
+        <field id="hash" type="string" />
+    </interface>
+    
+    <children>
+        <Rectangle width="1820" height="720" color="0x020202"/>
+        <MiniKeyboard translation="[110,130]" id="search_keyboard"/>
+        <LabelList id="search_list"
+            translation="[320,130]"
+            itemSize = "[300,50]"
+        />
+    </children>
+
+    <script type="text/brightscript" uri="event.brs" />  
+    <script type="text/brightscript" uri="search.brs" />    
+</component>

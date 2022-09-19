@@ -1,0 +1,71 @@
+<component name="appScene" extends="Group"> 
+
+    <interface>
+        <function name="keyEvent" />
+        <field id="type" type="string" />
+        <field id="filter" type="string" />
+        <field id="offset" type="integer" />
+    </interface>
+
+    <children>
+
+        <Group id="sidebar_container">
+            <Rectangle width="100" height="720" color="0x000000"/>
+
+            <Group translation="[35,120]" id="btn_search" >
+                <Rectangle width="50" height="50" color="0x00000000"/>
+                <Poster uri="pkg:/images/icons/light/search.png" width="50" height="50"/>
+            </Group>
+
+            <Group translation="[35,170]" id="btn_home" >
+                <Rectangle width="50" height="50" color="0x00000000"/>
+                <Poster uri="pkg:/images/icons/light/home.png" width="50" height="50" />
+            </Group>
+
+            <Group translation="[35,220]" id="btn_menu" >
+                <Rectangle width="50" height="50" color="0x00000000"/>
+                <Poster uri="pkg:/images/icons/light/menu.png" width="50" height="50" />
+            </Group>
+
+            <Group translation="[35,648]" id="btn_cls" >
+                <Rectangle width="50" height="50" color="0x00000000"/>
+                <Poster uri="pkg:/images/icons/light/close.png" width="50" height="50" />
+            </Group> 
+        </Group>
+
+        <PosterGrid id="movie_container" 
+            loadingBitmapUri="pkg:/images/assets/placeholder.webp"
+            vertFocusAnimationStyle="fixedFocus"
+            basePosterSize="[180,240]"
+            translation="[110,130]"
+            itemSpacing="[12,12]"
+            numColumns="6"
+            numRows="4"
+        />
+
+        <Group translation="[100,115]" visible="false" id="category_list_container">
+            <Rectangle color="0x000000"
+                width="350" height="720"
+            />  
+            <LabelList id="type_list"
+                vertFocusAnimationStyle="fixedFocus"
+                translation = "[20,10]"
+                itemSize = "[300,50]"
+                numRows="3"
+            />
+            <LabelList id="category_list"
+                vertFocusAnimationStyle="fixedFocus"
+                translation = "[20,180]"
+                itemSize = "[300,50]"
+                numRows="10"
+            />
+        </Group>
+
+        <Group id="movie_layout"/>
+        <OverHang title="ArepaTV" color="0x000000" showOptions="true"/>
+    </children>
+
+    <script type="text/brightscript" uri="style.brs" />
+    <script type="text/brightscript" uri="event.brs" />
+    <script type="text/brightscript" uri="app.brs" />
+</component>

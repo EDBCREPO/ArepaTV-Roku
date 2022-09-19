@@ -1,0 +1,30 @@
+<component name="registrationApi" extends="Task">
+    <interface>
+        <field id="token" type="string" value="arepatv" />
+        <field id="status" type="string" />
+        <field id="hash" type="string" />
+    </interface>
+    <script type="text/brightscript"><![CDATA[
+
+        function GetAuthData() as Void
+            sec = CreateObject( "roRegistrySection", m.top.token )
+            if sec.Exists("Arepa-token") 
+                m.top.hash = sec.Read("Arepa-token")
+                m.top.status = "done" 
+            else 
+                m.top.status = "error"
+            end if
+        end function
+
+        function SetAuthData() as Void
+            sec = CreateObject( "roRegistrySection", m.top.token )
+            sec.Write( "Arepa-token", m.top.hash ) : sec.Flush()
+        end function
+
+        function removeAuthData() as Void
+            sec = CreateObject( "roRegistrySection", m.top.token )
+            sec.Delete( "Arepa-token" ) : sec.Flush()
+        end function
+
+    ]]></script>
+</component>
