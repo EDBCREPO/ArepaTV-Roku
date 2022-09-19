@@ -26,7 +26,7 @@ end function
 function categoryLoader() as Void
     catList = m.top.findNode("category_list_container")
     el = catlist.getChild(2) : index = el.itemSelected
-    m.global.setFields({ 
+    m.global.setFields({
         filter: el.content.getChild(index).title, 
     })
 end function
@@ -53,7 +53,7 @@ function movieRequest() as Void
     m.fetch = createObject("roSGNode","fetchApi")
     m.fetch.observeField("response","showMovies")
     m.fetch.setField("headers",{
-        authetication: m.global.auth
+        "authetication-token": m.global.auth
     }) : m.fetch.setField("uri",uri)
     m.fetch.functionName = "main"
     m.fetch.control = "RUN"
