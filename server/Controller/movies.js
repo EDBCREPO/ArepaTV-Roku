@@ -1,4 +1,4 @@
-const fetch = require("molly-fetch");
+const fetch = require("axios");
 const url = require("url")
 
 module.exports = (req,res)=>{
@@ -24,8 +24,6 @@ module.exports = (req,res)=>{
                 target: `${table}|${x.hash}`,
             }
         }))
-    }).catch((reject)=>{
-        res.send(404,e?.message)
-    })
+    }).catch((e)=>{ res.send(404,e?.message) })
 
 }

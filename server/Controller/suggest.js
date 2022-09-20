@@ -1,4 +1,4 @@
-const fetch = require("molly-fetch");
+const fetch = require("axios");
 const url = require("url")
 
 module.exports = (req,res)=>{

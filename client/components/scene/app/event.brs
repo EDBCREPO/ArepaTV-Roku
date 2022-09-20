@@ -9,6 +9,7 @@ function eventMain() as Void
         "btn_cls",
     ] : m.index = 1
         m.top.findNode("movie_layout").removeChildIndex(0)
+        m.top.findNode("search_layout").removeChildIndex(0)
         m.currentID = m.current[m.index] : loadNewElement()
 end function
 
@@ -73,9 +74,7 @@ function selectedElement() as Void
     else if m.currentID = "btn_home"
         reloadPage()
     else if m.currentID = "btn_search"
-        el = m.top.findNode("search_layout")
-        m.layout = createObject("roSGNode","searchScene") 
-        el.appendChild(m.layout) : m.layout.observeField("visible","eventMain")
+        showSearchLayout()
     end if
 end function
 

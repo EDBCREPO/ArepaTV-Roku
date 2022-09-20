@@ -2,7 +2,9 @@
 
     <interface>
         <function name="keyEvent" />
-        <field id="capitulos" type="array" />
+        <field id="uri" type="string" />
+        <field id="pelicula" type="string" />
+        <field id="temporada" type="array" />
         <field id="movie" type="assocarray" />
     </interface>
 
@@ -11,25 +13,42 @@
         <Group>
             <Rectangle width="1280" height="720" color="0x000000" /> 
             <Poster width="1280" height="720" id="movie_background" />
-            <Rectangle width="1280" height="720" color="0x000000A0" /> 
+            <Rectangle width="1280" height="720" color="0x000000E0" /> 
         </Group>
         
         <Poster width="300" height="400" id="movie_poster" translation="[180,200]"/>
         <Label translation="[540,200]" id="movie_category" width="600"/>
-        <Label width="600" height="250" translation="[540,240]"
+        <Label translation="[180,130]" id="movie_nombre" width="1000"/>
+        <Label width="600" height="250" translation="[540,260]"
             id="movie_descricion" wrap="true"/>
-        <OverHang id="movie_nombre" color="0x00000000" />
 
         <Group>
             <Group id="btn_play" translation="[540,540]">
                 <Rectangle color="0xFFFFFF" width="200" height="50"/>
-                <Label color="0x000000" translation="[15,15]" text="Reproducir"/>
+                <Label color="0x000000" translation="[30,15]" text="Reproducir"/>
             </Group>
-            <Group id="btn_back" translation="[820,540]">
+            <Group id="btn_back" translation="[760,540]">
                 <Rectangle color="0xFFFFFF" width="200" height="50"/>
-                <Label color="0x000000" translation="[100,15]" text="Atras"/>
+                <Label color="0x000000" translation="[70,15]" text="Atras"/>
             </Group>
         </Group>
+
+        <Group id="Chapter_list" visible="false">
+            <Rectangle width="1280" height="720" color="0x020202" /> 
+            <RowList id="chapter_content_list" 
+                vertFocusAnimationStyle="fixedFocusWrap" 
+                rowFocusAnimationStyle="fixedFocusWrap"
+                drawFocusFeedback="false" 
+                rowItemSize="[[300,300]]" 
+                translation="[130,160]" 
+                showRowLabel="[true]"
+                itemSize="[1608,308]" 
+                itemSpacing="[20,20]"
+                numRows="4" />
+        </Group>
+
+        <OverHang id="movie_bar" color="0x00000000" />
+        <Video id="video_player" visible="false" width="1280" height="720" />
 
     </children>
 

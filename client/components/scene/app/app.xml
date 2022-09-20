@@ -37,7 +37,7 @@
             loadingBitmapUri="pkg:/images/assets/placeholder.webp"
             vertFocusAnimationStyle="fixedFocus"
             basePosterSize="[180,240]"
-            translation="[110,130]"
+            translation="[107,123]"
             itemSpacing="[12,12]"
             numColumns="6"
             numRows="4"

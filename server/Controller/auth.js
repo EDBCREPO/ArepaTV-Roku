@@ -1,5 +1,5 @@
 const url = require("url");
-const fetch = require("molly-fetch");
+const fetch = require("axios");
 
 module.exports = (req,res)=>{
     console.log(req.headers);

@@ -50,9 +50,17 @@ function hideCategorySelector() as Void
     m.top.findNode(m.currentID).setFocus(true)
 end function
 
+function showSearchLayout() as Void
+    el = m.top.findNode("search_layout")
+    m.layout = createObject("roSGNode","searchScene") 
+    el.appendChild(m.layout) : m.layout.observeField("visible","eventMain")
+end function
+
 function showMovieContent() as Void
-    el = m.top.findNode("movie_layout") : initState()
-    m.layout = createObject("roSGNode","movieScene")
-    m.layout.observeField("visible","eventMain")
-    el.appendChild(m.layout)
+    if m.loading = false : m.loading = true 
+        m.layout = createObject("roSGNode","movieScene")
+        m.global.target = "" : el = m.top.findNode("movie_layout")
+        el.appendChild(m.layout) : m.layout.observeField("visible","eventMain")
+        sleep(300) : m.loading = false
+    end if
 end function

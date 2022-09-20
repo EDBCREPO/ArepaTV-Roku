@@ -3,6 +3,7 @@ sub init() : eventMain() : main() : end sub
 function main() as Void
 
     m.loading = false : loadMovies()
+    m.global.observeField("filtered","loadMovies")
     m.global.observeField("offset","movieRequest")
     m.global.observeField("target","showMovieContent")
 
@@ -54,6 +55,7 @@ function movieRequest() as Void
     }) : m.fetch.setField("uri",uri)
     m.fetch.functionName = "main"
     m.fetch.control = "RUN"
+    m.global.filtered = ""
     
     end if
 end function

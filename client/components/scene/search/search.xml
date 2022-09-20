@@ -11,6 +11,10 @@
             translation="[580,130]"
             itemSize = "[600,50]"
         />
+        <Group translation="[130,600]" id="search_button">
+            <Rectangle color="0xFFFFFF50" width="350" height="50"/>
+            <Label text="Buscar" translation="[130,12]" color="0xFFFFFF"/>
+        </Group>
         <OverHang title="ArepaTV" color="0x000000"/>
     </children>
 
