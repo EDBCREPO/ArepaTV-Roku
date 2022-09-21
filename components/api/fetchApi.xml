@@ -12,17 +12,19 @@
     <script type = "text/brightscript" > <![CDATA[
         function main() as Void
 
-            regex = createObject("roRegex","\s+| +","gi")
-            m.top.uri = regex.replaceAll(m.top.uri,"")
-
             request = createObject("roUrlTransfer")
+            m.top.uri = slugify( m.top.uri )
             request.setUrl( m.top.uri )
+
+            print m.top.uri
 
             if left( m.top.uri,5 ) = "https"
                 request.SetCertificatesFile("common:/certs/ca-bundle.crt")
-                request.AddHeader("X-Roku-Reserved-Dev-Id", "")
+               'request.AddHeader("X-Roku-Reserved-Dev-Id", "")
                 request.InitClientCertificates()
             End if : request.SetUrl( m.top.uri )
+
+                request.AddHeader("X-Arepa-Authentticated", "")
 
             if m.top.method <> ""
                 request.SetRequest(m.top.method) 
@@ -47,5 +49,26 @@
             end if
 
         end function
+
+        function slugify( url as string ) as string
+
+            map = {
+                "a" : "á|ä|á",
+                "e" : "é|ë|é",
+                "i" : "í|ï|í",
+                "o" : "ó|ö|ó",
+                "u" : "ú|ü|ú",
+                ""  : " +|\s+",
+            } : result = url
+
+            for each reg in map
+                regex  = CreateObject("roRegex", map[reg], "gi")
+                result = regex.replaceAll(result,reg)
+            end for
+
+            return result
+
+        end function
+
     ]]> </script>
 </component>

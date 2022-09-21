@@ -61,6 +61,6 @@ function showMovieContent() as Void
         m.layout = createObject("roSGNode","movieScene")
         m.global.target = "" : el = m.top.findNode("movie_layout")
         el.appendChild(m.layout) : m.layout.observeField("visible","eventMain")
-        sleep(300) : m.loading = false
+        m.loading = false
     end if
 end function

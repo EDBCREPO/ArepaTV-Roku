@@ -13,8 +13,8 @@ function init() as Void
     '' creating global variable ''
     m.global = screen.getGlobalNode()  
     m.global.addFields({ target: "", filtered: "",
-        auth: "", ip:"http://192.168.101.8:3000",
         type: "peliculas", filter: "", offset:0
+        auth: "", ip:"https://arepatv.ml/api",
     }) : print m.global
 
     '' creating scene ''

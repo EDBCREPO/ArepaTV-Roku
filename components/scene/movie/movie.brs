@@ -1,4 +1,4 @@
-sub init() : eventMain() : main() : end sub
+sub init() : eventMain() : movieSelectorMain() : main() : end sub
 
 function main() as Void
     m.loading = false : movieContentRequest()
@@ -26,7 +26,7 @@ end function
 
 function showMovieContent() as Void
 
-    json = ParseJson(m.fetch.response) : print json 
+    json = ParseJson(m.fetch.response)
     m.top.findNode("movie_poster").uri = json.imagen
     m.top.findNode("movie_background").uri = json.poster
     m.top.findNode("movie_category").text = "categorias: "
@@ -44,6 +44,7 @@ function showMovieContent() as Void
         m.top.pelicula = json.magnet
     else
         m.top.temporada = json.magnet
+        loadChapterMagnetData()
     end if
 
     m.loading = false
@@ -52,9 +53,7 @@ end function
 function playMovieRequest() as Void
     if m.loading = false : m.loading = true
 
-        uri = m.global.ip+m.top.uri
-        print "echo"
-        print uri
+        uri = m.global.ip+m.top.uri : print uri
     
         m.fetch = createObject("roSGNode","fetchApi")
         m.fetch.observeField("response","playMovieContent")
@@ -70,13 +69,14 @@ end function
 function playMovieContent() as Void
 
     content = createObject("roSGNode","ContentNode")
+    title = m.top.findNode("movie_bar").title
     video = m.top.findNode("video_player")
     json = ParseJson( m.fetch.response )
     m.top.uri = "" : m.loading = false
-    
+
     content.streamformat = json[0].type
     content.url = json[0].file
-   'content.title = "none"
+    content.title = title
 
     m.currentID = "video_player"
     video.content = content
@@ -84,4 +84,27 @@ function playMovieContent() as Void
     video.visible = true
     video.setFocus(true)
 
+end function
+
+function loadChapterMagnetData() as Void
+
+    chapter_list = m.top.findNode("chapter_content_list")
+    content = createObject("roSGNode","ContentNode")
+    temporadas = m.top.temporada
+
+    for each x in temporadas' : X++
+        content_temporada = createObject("roSGNode","ContentNode")
+        
+        for each y in x' : Y++
+            content_capitulo = createObject("roSGNode","ContentNode")
+            content_temporada.appendChild(content_capitulo)
+            content_capitulo.addFields({ src: y.src })
+            content_capitulo.HDPOSTERURL = y.imagen
+            content_capitulo.TITLE = y.nombre
+        end for
+        
+        content.appendChild(content_temporada)
+    end for
+
+    chapter_list.content = content
 end function

@@ -14,7 +14,7 @@ function login() as Void
 
     Buffer = createObject("roByteArray")
     authetication = m.top.findNode( "login_user_text" ).text+"|"
-    authetication+= m.top.findNode( "login_pass_text" ).text+"|"
+    authetication+= m.top.findNode( "login_pass_text" ).text
 
     Buffer.FromAsciiString( authetication )
     authetication = Buffer.ToBase64String()

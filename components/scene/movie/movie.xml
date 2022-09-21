@@ -33,25 +33,27 @@
             </Group>
         </Group>
 
-        <Group id="Chapter_list" visible="false">
+        <OverHang id="movie_bar" color="0x00000000" />
+        <Group id="chapter_list" visible="false">
             <Rectangle width="1280" height="720" color="0x020202" /> 
-            <RowList id="chapter_content_list" 
-                vertFocusAnimationStyle="fixedFocusWrap" 
-                rowFocusAnimationStyle="fixedFocusWrap"
-                drawFocusFeedback="false" 
-                rowItemSize="[[300,300]]" 
-                translation="[130,160]" 
-                showRowLabel="[true]"
-                itemSize="[1608,308]" 
-                itemSpacing="[20,20]"
-                numRows="4" />
+            <RowList id="chapter_content_list"
+                rowItemSpacing="[[10,50]]"	
+                rowItemSize="[[300,200]]"
+                translation="[100,130]" 
+                showRowCounter="[true]"
+                itemSpacing="[10,10]"
+                itemSize="[1080,308]"
+                numRows="2"/>
+            <OverHang id="movie_temp" color="0x00000000" />
         </Group>
 
-        <OverHang id="movie_bar" color="0x00000000" />
-        <Video id="video_player" visible="false" width="1280" height="720" />
+        <Video id="video_player" visible="false" 
+            enableDecoderStats="true"
+            width="1280" height="720" />
 
     </children>
 
+    <script type="text/brightscript" uri="movieSelector.brs" />  
     <script type="text/brightscript" uri="event.brs" />  
     <script type="text/brightscript" uri="movie.brs" />    
 

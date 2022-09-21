@@ -3,7 +3,6 @@ sub init() : eventMain() : main() : end sub
 function main() as Void
 
     m.loading = false : loadMovies()
-    m.global.observeField("filtered","loadMovies")
     m.global.observeField("offset","movieRequest")
     m.global.observeField("target","showMovieContent")
 
@@ -61,11 +60,16 @@ function movieRequest() as Void
 end function
 
 function categoryRequest() as Void
+
+    uri = m.global.ip+"/category?" :  uri+= "type="+m.global.type
+    uri+= "&filter="+m.global.filter
+
     m.catfetch = createObject("roSGNode","fetchApi")
     m.catfetch.observeField("response","showCategories")
     m.catfetch.setField("uri",m.global.ip+"/category")
     m.catfetch.functionName = "main"
     m.catfetch.control = "RUN"
+    
 end function
 
 '-------------------------------------------------------------------------------------------------------------'
